@@ -9,6 +9,6 @@ import Main from '../components/main';
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <Main />,
-    document.body.appendChild(document.createElement('div')),
+    document.getElementById('app')
   )
 });
