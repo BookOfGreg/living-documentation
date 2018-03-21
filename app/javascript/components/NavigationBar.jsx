@@ -30,10 +30,12 @@ class NavigationBar extends Component {
     });
   }
   render() {
+    const { navbarBrand } = this.props;
+
     return (
       <div>
         <Navbar color="faded" light expand="md">
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
+          <NavbarBrand href="/">{navbarBrand}</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
@@ -68,6 +70,8 @@ class NavigationBar extends Component {
   }
 };
 
-
+NavigationBar.propTypes = {
+  navbarBrand: PropTypes.string
+};
 
 export default NavigationBar;

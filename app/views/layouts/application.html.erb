@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LivingDocumentation</title>
+    <title>Living Documentation</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,8 +9,8 @@
   </head>
 
   <body>
-    <%= javascript_pack_tag 'rendered_react' %>
-    <div id="app"></div>
+    <%= javascript_pack_tag 'server_rendering' %>
+    <%= react_component('NavigationBar', { navbarBrand: 'Living Documentation' }) %>
     <%= yield %>
   </body>
 </html>
