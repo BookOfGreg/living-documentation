@@ -11,8 +11,12 @@
   <body>
     <%= javascript_pack_tag 'server_rendering' %>
     <%= react_component('NavigationBar', { navbarBrand: 'Living Documentation' }) %>
+    <ul>
+      <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+
+    </ul>
     <% flash.each do |name, msg| %>
-      <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
+      <%= content_tag(:div, name + ': ' + msg, class: "alert alert-#{name}") %>
     <% end %>
     <%= yield %>
   </body>
