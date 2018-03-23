@@ -31,9 +31,9 @@ class NavigationBar extends Component {
   }
 
   createNavItems(links) {
-    return links.map(link => {
+    return links.map((link, idx) => {
       return (
-        <NavItem key={link.title}>
+        <NavItem key={idx}>
           <NavLink href={link.path}>{link.title}</NavLink>
         </NavItem>
       );

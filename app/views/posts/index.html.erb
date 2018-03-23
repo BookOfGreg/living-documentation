@@ -1,5 +1,10 @@
 <h1>Posts</h1>
 
+<%= react_component('Listing', {
+  headings: ['Title', 'Content', 'Category'],
+  rows: @posts
+}) %>
+
 <table>
   <thead>
     <tr>
