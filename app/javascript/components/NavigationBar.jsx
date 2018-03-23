@@ -32,21 +32,35 @@ class NavigationBar extends Component {
 
   createNavItems(links) {
     return links.map((link, idx) => {
-      let addAttributes = {};
-
-      if (link.delete) {
-        addAttributes.rel = 'nofollow';
-        addAttributes['data-method'] = 'delete';
+      if (link.dropdown) {
+        return (
+          <UncontrolledDropdown nav inNavbar key={idx}>
+            <DropdownToggle nav caret>
+              {link.title}
+            </DropdownToggle>
+            <DropdownMenu >
+              {this.createDropdownMenu(link.links)}
+            </DropdownMenu >
+          </UncontrolledDropdown>
+        );
       }
-  
+
       return (
         <NavItem key={idx}>
-          <NavLink {...addAttributes} href={link.path}>
+          <NavLink {...link.attributes} href={link.path}>
             {link.title}
           </NavLink>
         </NavItem>
       );
     });
+  }
+
+  createDropdownMenu(links) {
+    return links.map((link, idx) => (
+      <DropdownItem key={idx} {...link.attributes} href={link.path}>
+        {link.title}
+      </DropdownItem>
+    ));
   }
 
   render() {

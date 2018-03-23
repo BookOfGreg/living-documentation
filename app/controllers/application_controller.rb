@@ -19,7 +19,10 @@ class ApplicationController < ActionController::Base
       @enabled_links += [
         { title: 'Add Post', path: new_post_path },
         { title: 'Add Category', path: new_category_path },
-        { title: 'Logout', path: destroy_user_session_path, delete: true }
+        { title: 'Profile', dropdown: true, links: [
+          { title: 'Edit Profile', path: edit_user_registration_path },
+          { title: 'Logout', path: destroy_user_session_path, attributes: { rel: 'nofollow', 'data-method': 'delete' }}
+        ]}
       ] if user_signed_in?
     end
 end
