@@ -10,17 +10,11 @@
 
   <body>
     <%= javascript_pack_tag 'server_rendering' %>
-    <%= react_component('NavigationBar', { navbarBrand: 'Living Documentation' }) %>
+    <%= react_component('NavigationBar', {
+        navbarBrand: 'Living Documentation',
+        enabledLinks: @enabled_links
+    }) %>
     <div class="container">
-      <ul>
-        <li><%= link_to 'View Posts', posts_path, class: 'nav-link' %></li>
-        <li><%= link_to 'Add Post', new_post_path, class: 'nav-link' %></li>
-        <li><%= link_to 'View Categories', categories_path, class: 'nav-link' %></li>
-        <li><%= link_to 'Add Category', new_category_path, class: 'nav-link' %></li>
-        <li><%= link_to 'Login', new_user_session_path, class: 'nav-link' %></li>
-        <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link' %></li>
-      </ul>
-
       <% flash.each do |name, msg| %>
         <%= react_component('FlashMessage', { type: name, message: msg }) %>
       <% end %>
