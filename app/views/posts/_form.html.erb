@@ -11,22 +11,22 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :title %>
-    <%= form.text_field :title, id: :post_title %>
+    <%= form.text_field :title, id: :post_title, class: 'form-control'  %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :content %>
-    <%= form.text_area :content, id: :post_content %>
+    <%= form.text_area :content, id: :post_content, class: 'form-control'  %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :category_id %>
-    <%= form.collection_select(:category_id, Category.all, :id, :name, { prompt: 'Choose a category' }) %>
+    <%= form.collection_select(:category_id, Category.all, :id, :name, { prompt: 'Choose a category' }, class: 'form-control' ) %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

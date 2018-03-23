@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
       @enabled_links += [
         { title: 'Add Post', path: new_post_path },
-        { title: 'Add Category', path: new_user_session_path },
+        { title: 'Add Category', path: new_category_path },
         { title: 'Logout', path: destroy_user_session_path, delete: true }
       ] if user_signed_in?
     end
