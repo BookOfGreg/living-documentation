@@ -32,9 +32,18 @@ class NavigationBar extends Component {
 
   createNavItems(links) {
     return links.map((link, idx) => {
+      let addAttributes = {};
+
+      if (link.delete) {
+        addAttributes.rel = 'nofollow';
+        addAttributes['data-method'] = 'delete';
+      }
+  
       return (
         <NavItem key={idx}>
-          <NavLink href={link.path}>{link.title}</NavLink>
+          <NavLink {...addAttributes} href={link.path}>
+            {link.title}
+          </NavLink>
         </NavItem>
       );
     });
