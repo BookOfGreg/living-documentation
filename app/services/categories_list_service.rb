@@ -32,7 +32,7 @@ class CategoriesListService
 
     def check_admin_access(category)
       return {} unless @current_user
-      return {} unless @current_user.id == category.user_id
+      return {} unless category.user == @current_user
       {
         edit: { text: 'Edit', link: true, attributes: { href: "/categories/#{category.id}/edit" } },
         delete: { text: 'Destroy', link: true, attributes: {

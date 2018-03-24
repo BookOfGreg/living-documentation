@@ -34,7 +34,7 @@ class PostsListService
 
     def check_admin_access(post)
       return {} unless @current_user
-      return {} unless @current_user.id == post.user_id
+      return {} unless post.user == @current_user
       {
         edit: { text: 'Edit', link: true, attributes: { href: "/posts/#{post.id}/edit" } },
         delete: { text: 'Destroy', link: true, attributes: {
