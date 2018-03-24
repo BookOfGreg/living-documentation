@@ -3,23 +3,33 @@ import { Table } from 'reactstrap';
 
 class Listing extends Component {
   createTableHeadings(headings) {
-    return headings.map((heading, idx) => <th key={idx}>{heading}</th>);
+    return headings.map((heading, idx) => (
+      <th key={idx} {...heading.attributes}>
+        {heading.name}
+      </th>
+    ));
   }
 
-  createTableRows(rows) {
-    return rows.map((row) => (
-      <tr key={row.id}>
-        <th scope="row">{row.title}</th>
-        <td>{row.content}</td>
-        <td>{row.category_id}</td>
+  createTableRows(rows, keys) {
+    return rows.map((row, idx) => (
+      <tr key={idx}>
+        {this.createTableRowColumns(row, keys)}
       </tr>
     ));
   }
 
-  render() {
-    console.log('---- this.props', this.props);
+  createTableRowColumns(row, keys) {
+    return keys.map((key, idx) => {
+      const { text, link, attributes } = row[key];
+      if (link) {
+        return <td key={idx}><a {...attributes}>{text}</a></td>
+      }
+      return <td key={idx}>{text}</td>;
+    });
+  }
 
-    const { headings, rows } = this.props;
+  render() {
+    const { headings, keys, rows } = this.props;
 
     return (
       <Table>
@@ -29,7 +39,7 @@ class Listing extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.createTableRows(rows)}
+          {this.createTableRows(rows, keys)}
         </tbody>
       </Table>
     );

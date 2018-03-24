@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+    @posts_list = PostsListService.new(@posts, current_user).list
   end
 
   # GET /posts/1
