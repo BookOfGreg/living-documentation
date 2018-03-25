@@ -10,7 +10,7 @@
 
 <p>
   <strong>Category:</strong>
-  <%= @post.category_id %>
+  <%= Category.where(id: @post.category_ids).map(&:name).join(', ') %>
 </p>
 
 <% if @post.user == current_user %>

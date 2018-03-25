@@ -8,8 +8,7 @@ class CategoriesListService
     {
       headings: build_headings,
       keys: build_keys,
-      rows: build_list,
-      raw: @categories
+      rows: build_list
     }
   end
 

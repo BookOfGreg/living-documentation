@@ -8,8 +8,7 @@ class PostsListService
     {
       headings: build_headings,
       keys: build_keys,
-      rows: build_list,
-      raw: @posts
+      rows: build_list
     }
   end
 
@@ -46,12 +45,16 @@ class PostsListService
       }
     end
 
+    def build_categories(category_ids)
+      Category.where(id: category_ids).map(&:name).join(', ')
+    end
+
     def build_list
       @posts.map{ |post|
         {
           title: { text: post.title },
           content: { text: post.content },
-          category: { text: post.category_id },
+          category: { text: build_categories(post.category_ids) },
           show: { text: 'Show', link: true, attributes: { href: "/posts/#{post.id}" }  }
         }.merge(check_admin_access(post))
       }
