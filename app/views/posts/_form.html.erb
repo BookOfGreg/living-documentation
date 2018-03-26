@@ -23,7 +23,7 @@
 
   <div class="form-group">
     <%= form.label :category_ids %>
-    <%= form.collection_select(:category_ids, Category.all, :id, :name, { prompt: 'Choose a category' }, multiple: true, class: 'form-control' ) %>
+    <%= form.collection_select(:category_ids, Category.all.order('LOWER(name) ASC'), :id, :name, { prompt: 'Choose a category' }, multiple: true, class: 'form-control' ) %>
   </div>
 
   <div class="actions">

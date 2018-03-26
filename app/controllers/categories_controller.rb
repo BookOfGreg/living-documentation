@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.all.order('LOWER(name) ASC')
     @categories_list = CategoriesListService.new(@categories, current_user).list
   end
 
