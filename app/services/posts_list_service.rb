@@ -6,9 +6,8 @@ class PostsListService
 
   def list
     {
-      headings: build_headings,
       keys: build_keys,
-      rows: build_list
+      posts: build_list
     }
   end
 
@@ -39,17 +38,17 @@ class PostsListService
       keys
     end
 
-    def build_headings
-      headings = [
-        { name: 'Title' },
-        { name: 'Content' },
-        { name: 'Category' },
-        { name: 'DateTime' },
-        { attribute: { colSpan: '1' } }
-      ]
-      headings += [{ attributes: { colSpan: '2' } }] if @current_user
-      headings
-    end
+    # def build_headings
+    #   headings = [
+    #     { name: 'Title' },
+    #     { name: 'Content' },
+    #     { name: 'Category' },
+    #     { name: 'DateTime' },
+    #     { attribute: { colSpan: '1' } }
+    #   ]
+    #   headings += [{ attributes: { colSpan: '2' } }] if @current_user
+    #   headings
+    # end
 
     def check_admin_access(post)
       return {} unless @current_user
@@ -66,17 +65,18 @@ class PostsListService
     end
 
     def build_categories(category_ids)
-      Category.where(id: category_ids).map(&:name).join(', ')
+      Category.where(id: category_ids).map(&:name)
     end
 
     def build_list
       @posts.map{ |post|
         {
-          title: { text: post.title },
-          content: { text: post.content },
-          category: { text: build_categories(post.category_ids) },
-          datetime: { text: build_datetime(post) },
-          show: { text: 'Show', link: true, attributes: { href: "/posts/#{post.id}" }  }
+          id: post.id,
+          title: post.title,
+          content: post.content,
+          category: build_categories(post.category_ids),
+          datetime: build_datetime(post),
+          path: "/posts/#{post.id}"
         }.merge(check_admin_access(post))
       }
     end

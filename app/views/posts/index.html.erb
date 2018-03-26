@@ -1,6 +1,4 @@
-<h1>Posts</h1>
-
-<%= react_component('Listing', @posts_list) %>
+<%= react_component('Posts', @posts_list) %>
 
 <% if user_signed_in? %>
   <%= link_to 'New Post', new_post_path %>
