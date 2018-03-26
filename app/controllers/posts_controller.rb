@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)
+    @posts = Post.all.page(params[:page]).order('created_at DESC')
     @posts_list = PostsListService.new(@posts, current_user).list
   end
 
