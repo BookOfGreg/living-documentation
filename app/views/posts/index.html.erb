@@ -6,4 +6,4 @@
   <%= link_to 'New Post', new_post_path %>
 <% end %>
 
-<%= will_paginate @posts %>
+<%= will_paginate @posts, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
