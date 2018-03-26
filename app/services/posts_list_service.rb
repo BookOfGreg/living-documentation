@@ -14,8 +14,27 @@ class PostsListService
 
   private
 
+    def build_datetime(post)
+      created_datetime = convert_to_datetime(post.created_at)
+      updated_datetime = convert_to_datetime(post.updated_at)
+      datetime_text = convert_to_clean_datetime(created_datetime)
+      if (created_datetime != updated_datetime)
+        updated_datetime_str = convert_to_clean_datetime(updated_datetime)
+        datetime_text = "#{datetime_text} (edited on #{updated_datetime_str})"
+      end
+      datetime_text
+    end
+
+    def convert_to_clean_datetime(datetime)
+      datetime.strftime('%m/%d/%Y at %I:%M%p')
+    end
+
+    def convert_to_datetime(datetime)
+      DateTime.parse(datetime.to_s)
+    end
+
     def build_keys
-      keys = [ 'title', 'content', 'category', 'show' ]
+      keys = [ 'title', 'content', 'category', 'datetime', 'show' ]
       keys += ['edit', 'delete'] if @current_user
       keys
     end
@@ -25,6 +44,7 @@ class PostsListService
         { name: 'Title' },
         { name: 'Content' },
         { name: 'Category' },
+        { name: 'DateTime' },
         { attribute: { colSpan: '1' } }
       ]
       headings += [{ attributes: { colSpan: '2' } }] if @current_user
@@ -55,6 +75,7 @@ class PostsListService
           title: { text: post.title },
           content: { text: post.content },
           category: { text: build_categories(post.category_ids) },
+          datetime: { text: build_datetime(post) },
           show: { text: 'Show', link: true, attributes: { href: "/posts/#{post.id}" }  }
         }.merge(check_admin_access(post))
       }
