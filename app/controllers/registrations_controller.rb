@@ -1,15 +1,15 @@
-class RegistrationsController < Devise::RegistrationsController
+# frozen_string_literal: true
 
-  before_action :one_user_registered?, only: [:new, :create]
-  
+class RegistrationsController < Devise::RegistrationsController
+  before_action :one_user_registered?, only: %i[new create]
+
   protected
 
   def one_user_registered?
-    if ((User.count == 1) & (user_signed_in?))
+    if User.count == 1 && user_signed_in?
       redirect_to root_path
     elsif User.count == 1
       redirect_to new_user_session_path
-    end  
+    end
   end
-
 end

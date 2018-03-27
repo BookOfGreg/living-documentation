@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :correct_user, only: [:edit, :update, :destory]
+  before_action :set_post, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :correct_user, only: %i[edit update destory]
 
   # GET /posts
   # GET /posts.json
@@ -12,8 +14,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   # GET /posts/1.json
-  def show
-  end
+  def show; end
 
   # GET /posts/new
   def new
@@ -21,11 +22,11 @@ class PostsController < ApplicationController
   end
 
   # GET /posts/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /posts
   # POST /posts.json
+  # rubocop:disable AbcSize
   def create
     @post = current_user.posts.build(post_params)
 
@@ -39,6 +40,7 @@ class PostsController < ApplicationController
       end
     end
   end
+  # rubocop:enable AbcSize
 
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
@@ -65,18 +67,19 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:title, :content, category_ids: [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-    def correct_user
-      @post = current_user.posts.find_by(id: params[:id])
-      redirect_to posts_path, notice: 'Not authorized to edit this post' if @post.nil?
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params.require(:post).permit(:title, :content, category_ids: [])
+  end
+
+  def correct_user
+    @post = current_user.posts.find_by(id: params[:id])
+    redirect_to posts_path, notice: 'Not authorized to edit this post' if @post.nil?
+  end
 end
