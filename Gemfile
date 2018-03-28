@@ -47,6 +47,9 @@ gem 'will_paginate-bootstrap4'
 gem 'rubocop', '~> 0.54.0'
 gem 'rspec', '~> 3.7'
 gem 'rspec-rails', '~> 3.7', '>= 3.7.2'
+# gem 'factory_bot', '~> 4.8', '>= 4.8.2'
+# gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
+# gem 'faker'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

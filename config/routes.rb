@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :test_posts
   resources :categories
   resources :posts
   devise_for :users, controllers: { registrations: 'registrations' },  path: '', path_names: { sign_in: 'login', sign_out: 'logout'}
